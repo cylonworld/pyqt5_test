@@ -33,7 +33,6 @@ class Ui_MainWindow(object):
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-        MainWindow.insertToolBarBreak(self.toolBar)
         self.fileopen = QtWidgets.QAction(MainWindow)
         self.fileopen.setObjectName("fileopen")
         self.actionShow = QtWidgets.QAction(MainWindow)
@@ -61,4 +60,4 @@ class Ui_MainWindow(object):
         self.actionShow.setText(_translate("MainWindow", "show"))
         self.actionClose.setText(_translate("MainWindow", "close"))
 
-import img_qrc
+import ui.img_qrc
