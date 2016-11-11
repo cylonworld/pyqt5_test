@@ -2,7 +2,7 @@ import sys
 
 from PyQt5 import QtWidgets
 
-from ui_test import Ui_Form
+from ui.ui_test import Ui_Form
 
 
 class Newwindow(QtWidgets.QWidget,Ui_Form):

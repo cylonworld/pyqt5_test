@@ -1,7 +1,9 @@
 import sys
+
 from PyQt5 import QtWidgets
-from ui_main import Ui_MainWindow
-from ui_child import Ui_Form
+from ui.ui_main import Ui_MainWindow
+
+from ui.ui_child import Ui_Form
 
 
 class Newwindow(QtWidgets.QMainWindow,Ui_MainWindow):
