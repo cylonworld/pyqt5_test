@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""网上代码未标明作者"""
+"""网上代码来源未知"""
 import sys
 import random
 from PyQt5 import QtWidgets, QtCore, QtGui

@@ -4,6 +4,7 @@ from PyQt5 import QtCore
 from ui.ui_main_qgraphics_view import Ui_MainWindow
 import sys
 import math
+import random
 
 from PyQt5.QtCore import (QEasingCurve, QFileInfo, QLineF, QMimeData,
         QParallelAnimationGroup, QPoint, QPointF, QPropertyAnimation, qrand,
@@ -17,6 +18,7 @@ class node(QtWidgets.QGraphicsItem):
     def __init__(self):
         super(node,self).__init__()
         self.color = QColor(qrand() % 256, qrand() % 256, qrand() % 256)
+        self.timer = QtCore.QBasicTimer()
 
 
 
@@ -41,6 +43,7 @@ class node(QtWidgets.QGraphicsItem):
         self.setCursor(Qt.OpenHandCursor)  #在经过对象时，鼠标松开时的光标设置
 
 
+
 class myobj(QGraphicsObject):
     def __init__(self, parent=None):
         super(myobj, self).__init__(parent)
@@ -52,23 +55,22 @@ class myobj(QGraphicsObject):
         rot_animation.setStartValue(-200)
         rot_animation.setEndValue(600)
         rot_animation.setEasingCurve(QEasingCurve.SineCurve)
-        rot_animation.setDuration(1000)
+        rot_animation.setDuration(3000)
         animation.addAnimation(rot_animation)
 
         animation.setLoopCount(-1)
         animation.start()
 
     def boundingRect(self):
-        return QtCore.QRectF(-15.5, -15.5, 34, 34)
+        return QtCore.QRectF(-32.5, -32.5, 40, 40)
 
     def paint(self,painter,option,widget):
         painter.save()#保存状态
+
         painter.setPen(Qt.NoPen)
-        painter.setBrush(Qt.darkGray)
-        painter.drawEllipse(-12, -12, 30, 30)
-        painter.setPen(QPen(Qt.black, 1))
-        painter.setBrush(QBrush(self.color))
-        painter.drawEllipse(-15, -15, 30, 30)
+        painter.setBrush(QBrush(QColor(random.randint(100,200),random.randint(100,200),random.randint(100,200),random.randint(70,255))))
+        painter.drawEllipse(-5, -5, 5, 5)
+
         painter.restore()#恢复状态，需要成对使用
 
 
@@ -82,15 +84,21 @@ class Newwindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.myscene.setBackgroundBrush(QtGui.QColor(100, 100, 100, 255))
         self.setWindowTitle('QGraphicsView test')
         self.graphicsView.setScene(self.myscene)
+
+
         # brush=QtGui.QBrush(QtGui.QColor(255, 0, 0, 20))
         # pen=QtGui.QPen(QtGui.QColor(255, 100, 0, 127))
         # self.myscene.addEllipse(0, 0, 300, 60,pen,brush)
         # self.myscene.addEllipse(0, 100, 300, 60,pen,brush)
         # self.myscene.addText("彩云", QtGui.QFont("华文彩云", 120))
+        for i in range(500):
+            item = myobj()
+            item.setPos(random.randint(10,600),random.randint(10,400))
+            self.myscene.addItem(item)
+
         for i in range(10):
             item = node()
-            angle = i * 6.28 / 10.0
-            item.setPos(math.sin(angle) * 150, math.cos(angle) * 150)
+            item.setPos(random.randint(10,600),random.randint(10,400))
             self.myscene.addItem(item)
 
         self.myscene.addItem(myobj())
